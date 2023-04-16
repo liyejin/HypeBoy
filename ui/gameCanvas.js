@@ -1,9 +1,14 @@
-import Girl from "../items/Girl";
+import Girl from "../items/girl.js";
+import Enemy from "../items/enemy.js";
+import Map from "../items/map.js";
 
 export default class GameCanvas {
   #canvas;
   #ctx;
+  #tid;
+  #map;
   #girl;
+  #enemy;
 
   constructor() {
     // create canvas
@@ -13,13 +18,30 @@ export default class GameCanvas {
 
     // canvas size
     this.#canvas.width = 700;
-    this.#canvas.#height = 500;
+    this.#canvas.height = 500;
 
     // class_girl
     this.#girl = new Girl();
+
+    // class_map
+    this.#map = new Map();
+
+    // class_enemy
+    this.#enemy = new Enemy();
+
+    // time ID
+    this.#tid = null;
   }
 
-  draw(ctx) {
+  run() {
+    this.#tid = setInterval(() => {
+      this.update();
+      this.draw();
+    }, 16);
+  } //run
+
+  draw() {
+    this.#map.draw(this.#ctx);
     this.#girl.draw(this.#ctx);
   } //draw
 
