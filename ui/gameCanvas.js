@@ -34,26 +34,48 @@ export default class GameCanvas {
     // time ID
     this.#tid = null;
 
-    // keyboard input
+    // keyboard handler
     this.#canvas.onkeydown = this.keyDownHandler.bind(this);
+    this.#canvas.onkeyup = this.keyUpHandler.bind(this); 
+  }
+
+  keyUpHandler(e){
+    switch (e.key) {
+      case "ArrowUp":
+        // console.log("up")
+        this.#girl.stop("up");
+        break;
+      case "ArrowRight":
+        // console.log("down")
+        this.#girl.stop("right");
+        break;
+      case "ArrowDown":
+        // console.log("down")
+        this.#girl.stop("down");
+        break;
+        case "ArrowLeft":
+          // console.log("left")
+        this.#girl.stop("left");
+        break;
+    }
   }
 
   keyDownHandler(e) {
     switch (e.key) {
       case "ArrowUp":
-        console.log("up")
+        // console.log("up")
         this.#girl.move("up");
         break;
       case "ArrowRight":
-        console.log("down")
+        // console.log("down")
         this.#girl.move("right");
         break;
       case "ArrowDown":
-        console.log("down")
+        // console.log("down")
         this.#girl.move("down");
         break;
         case "ArrowLeft":
-          console.log("left")
+          // console.log("left")
         this.#girl.move("left");
         break;
     }

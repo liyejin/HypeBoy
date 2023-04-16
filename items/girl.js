@@ -7,6 +7,15 @@ export default class Girl {
   #walkStep;
   #walkDirection;
 
+  #speed;
+  #goUp;
+  #goRight;
+  #goDown;
+  #goLeft;
+
+  #delay;
+  #isMoving;
+
   constructor() {
     // image draw
     this.#image = document.getElementById("girl");
@@ -17,13 +26,96 @@ export default class Girl {
     this.#width = this.#image.width / 3;
     this.#height = this.#image.height / 4;
 
-    // 발돋움
-    this.#walkStep = 0;
-
+    
+    // 걷는 방향
+    this.#goUp = false;
+    this.#goDown = false;
+    this.#goLeft = false;
+    this.#goRight = false;
+    
+    
     // 방향
     this.#walkDirection = 1;
+    this.#speed = 2;
+    // 발돋움
+    this.#walkStep = 1;
   }
 
+  stop(direction){
+    switch (direction){
+      case "up":
+        this.#goUp = false;
+        this.#walkStep = 0;
+        this.#walkDirection = 1;
+        break;
+
+      case "right":
+        this.#goRight = false;
+        this.#walkStep = 0;
+        this.#walkDirection = 1;
+      break;
+      
+      case "down":
+        this.#goDown = false;
+        this.#walkStep = 0;
+        this.#walkDirection = 1;
+      break;
+
+      case "left":
+        this.#goLeft = false;
+        this.#walkStep = 0;
+        this.#walkDirection = 1;
+      break;
+
+    }
+  }
+
+  move(direction){
+    switch (direction){
+      case "up":
+        this.#goUp = true;
+        this.#walkDirection = 0;
+        break;
+
+      case "right":
+        this.#goRight = true;
+        this.#walkDirection = 2;
+      break;
+      
+      case "down":
+        this.#goDown = true;
+        this.#walkDirection = 1;
+      break;
+
+      case "left":
+        this.#goLeft = true;
+        this.#walkDirection = 3;
+      break;
+    }
+  }
+
+  update() {
+    // 위 화살표를 눌렀을 때 y축에 변화량을 주는 것
+    if(this.#goUp){
+      this.#y -= this.#speed;
+    }
+    if(this.#goRight){
+      this.#x += this.#speed;
+    }
+    if(this.#goDown){
+      this.#y += this.#speed;
+    }
+    if(this.#goLeft){
+      this.#x -= this.#speed;
+    }
+    this.#delay--;
+    if(this.#delay==0){
+      this.#walkStep = (this.#walkStep == 1)? 2:1;
+      this.#delay = 20;
+    }
+
+  } //update
+  
   draw(ctx) {
     let img = this.#image;
     let x = this.#x;
@@ -36,5 +128,4 @@ export default class Girl {
     ctx.drawImage(img, sx, sy, w, h, x, y, w, h);
   } //draw
 
-  update() {} //update
 }
