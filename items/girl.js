@@ -48,23 +48,15 @@ export default class Girl {
     switch (direction) {
       case "up":
         this.#goUp = false;
-        this.#walkDirection = 1;
-        this.#walkStep = 0;
         break;
       case "right":
         this.#goRight = false;
-        this.#walkDirection = 1;
-        this.#walkStep = 0;
         break;
       case "down":
         this.#goDown = false;
-        this.#walkDirection = 1;
-        this.#walkStep = 0;
         break;
       case "left":
         this.#goLeft = false;
-        this.#walkDirection = 1;
-        this.#walkStep = 0;
         break;
     }
   }
@@ -90,6 +82,13 @@ export default class Girl {
   }
 
   update() {
+    let isMoving = this.#goUp || this.#goRight || this.#goDown || this.#goLeft;
+    if(!isMoving){
+      this.#walkDirection = 1;
+      this.#walkStep = 0;
+      return;
+    }
+    
     if (this.#goUp) {
       this.#y -= this.#speed;
     }
