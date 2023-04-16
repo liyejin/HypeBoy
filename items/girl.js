@@ -1,4 +1,4 @@
-export default class Boy{
+export default class Girl{
     constructor(){
         
     }
