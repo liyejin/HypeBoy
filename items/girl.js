@@ -90,6 +90,13 @@ export default class Girl {
   }
 
   update() {
+    let isMoving = this.#goUp || this.#goRight || this.#goDown || this.#goLeft;
+    if (!isMoving) {
+      this.#walkDirection = 1;
+      this.#walkStep = 0;
+      return;
+    }
+
     if (this.#goUp) {
       this.#y -= this.#speed;
     }
