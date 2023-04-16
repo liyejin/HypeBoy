@@ -29,6 +29,22 @@ export default class Girl {
     this.#walkDirection = 0;
   }
 
+  move(direction) {
+    switch (direction) {
+      case 1:
+        break;
+
+      case 2:
+        break;
+
+      case 3:
+        break;
+
+      case 4:
+        break;
+    }
+  }
+
   draw(ctx) {
     let img = this.#image;
     let x = this.#x;

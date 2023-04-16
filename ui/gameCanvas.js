@@ -15,6 +15,10 @@ export default class GameCanvas {
     this.#canvas = document.createElement("canvas"); // canvas 생성(가져오기 X)
     document.body.append(this.#canvas);
     this.#ctx = this.#canvas.getContext("2d");
+    this.#canvas.focus();
+    this.#canvas.tabindex = 0;
+
+    this.#canvas.onkeydown = this.keyDownHandler.bind(this); //호출하는 곳에서 바인드
 
     // canvas size
     this.#canvas.width = 700;
@@ -31,6 +35,28 @@ export default class GameCanvas {
 
     // time ID
     this.#tid = null;
+  }
+
+  keyDownHandler(e) {
+    switch (e.key) {
+      case "ArrowUp":
+        console.log("up");
+        this.#girl.move(up);
+        break;
+
+      case "ArrowRight":
+        console.log("down");
+        this.#girl.move(2);
+        break;
+
+      case "ArrowDown":
+        this.#girl.move(3);
+        break;
+
+      case "ArrowLeft":
+        this.#girl.move(4);
+        break;
+    }
   }
 
   run() {
