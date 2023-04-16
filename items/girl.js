@@ -17,16 +17,11 @@ export default class Girl {
     this.#width = this.#image.width / 3;
     this.#height = this.#image.height / 4;
 
-    // this.#sx = ;
-    // this.#sy = ;
-    // this.#sw = ;
-    // this.#sh = ;
-
     // 발돋움
-    this.#walkStep = 2;
+    this.#walkStep = 0;
 
     // 방향
-    this.#walkDirection = 0;
+    this.#walkDirection = 1;
   }
 
   move(direction) {
@@ -53,8 +48,6 @@ export default class Girl {
     let h = this.#height;
     let sx = this.#walkStep * w;
     let sy = this.#walkDirection * h;
-    // let sw =
-    // let sh =
 
     ctx.drawImage(img, sx, sy, w, h, x, y, w, h);
   } //draw
