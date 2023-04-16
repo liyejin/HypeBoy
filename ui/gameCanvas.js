@@ -29,53 +29,47 @@ export default class GameCanvas {
     this.#map = new Map();
 
     // class_enemy
-    this.#enemy = new Enemy();
+    this.#enemy = [];
 
     // time ID
     this.#tid = null;
 
     // keyboard handler
     this.#canvas.onkeydown = this.keyDownHandler.bind(this);
-    this.#canvas.onkeyup = this.keyUpHandler.bind(this); 
+    this.#canvas.onkeyup = this.keyUpHandler.bind(this);
   }
 
-  keyUpHandler(e){
+
+  keyUpHandler(e) {
     switch (e.key) {
       case "ArrowUp":
-        // console.log("up")
         this.#girl.stop("up");
         break;
       case "ArrowRight":
-        // console.log("down")
         this.#girl.stop("right");
         break;
       case "ArrowDown":
-        // console.log("down")
         this.#girl.stop("down");
         break;
         case "ArrowLeft":
-          // console.log("left")
         this.#girl.stop("left");
         break;
     }
   }
-
   keyDownHandler(e) {
     switch (e.key) {
       case "ArrowUp":
-        // console.log("up")
+        console.log("up")
         this.#girl.move("up");
         break;
       case "ArrowRight":
-        // console.log("down")
+        console.log("down")
         this.#girl.move("right");
         break;
       case "ArrowDown":
-        // console.log("down")
         this.#girl.move("down");
         break;
         case "ArrowLeft":
-          // console.log("left")
         this.#girl.move("left");
         break;
     }
@@ -88,6 +82,8 @@ export default class GameCanvas {
 
   update() {
     this.#girl.update();
+    
+    this.#enemy = new Enemy();
   } //update
 
   run() {

@@ -26,96 +26,89 @@ export default class Girl {
     this.#width = this.#image.width / 3;
     this.#height = this.#image.height / 4;
 
-    
+
     // 걷는 방향
+    this.#speed = 2;
     this.#goUp = false;
+    this.#goRight = false;
     this.#goDown = false;
     this.#goLeft = false;
-    this.#goRight = false;
-    
-    
+    this.#isMoving = false;
+
+    // 왼/오른발 방향 delay
+    this.#delay = 20;
+
     // 방향
     this.#walkDirection = 1;
-    this.#speed = 2;
     // 발돋움
     this.#walkStep = 1;
   }
 
-  stop(direction){
-    switch (direction){
+  stop(direction) {
+    switch (direction) {
       case "up":
         this.#goUp = false;
-        this.#walkStep = 0;
         this.#walkDirection = 1;
+        this.#walkStep = 0;
         break;
-
       case "right":
         this.#goRight = false;
-        this.#walkStep = 0;
         this.#walkDirection = 1;
-      break;
-      
+        this.#walkStep = 0;
+        break;
       case "down":
         this.#goDown = false;
-        this.#walkStep = 0;
         this.#walkDirection = 1;
-      break;
-
+        this.#walkStep = 0;
+        break;
       case "left":
         this.#goLeft = false;
-        this.#walkStep = 0;
         this.#walkDirection = 1;
-      break;
-
+        this.#walkStep = 0;
+        break;
     }
   }
-
-  move(direction){
-    switch (direction){
+  move(direction) {
+    switch (direction) {
       case "up":
         this.#goUp = true;
         this.#walkDirection = 0;
         break;
-
       case "right":
         this.#goRight = true;
         this.#walkDirection = 2;
-      break;
-      
+        break;
       case "down":
         this.#goDown = true;
         this.#walkDirection = 1;
-      break;
-
+        break;
       case "left":
         this.#goLeft = true;
         this.#walkDirection = 3;
-      break;
+        break;
     }
   }
 
   update() {
-    // 위 화살표를 눌렀을 때 y축에 변화량을 주는 것
-    if(this.#goUp){
+    if (this.#goUp) {
       this.#y -= this.#speed;
     }
-    if(this.#goRight){
+    if (this.#goRight) {
       this.#x += this.#speed;
     }
-    if(this.#goDown){
+    if (this.#goDown) {
       this.#y += this.#speed;
     }
-    if(this.#goLeft){
+    if (this.#goLeft) {
       this.#x -= this.#speed;
     }
     this.#delay--;
     if(this.#delay==0){
-      this.#walkStep = (this.#walkStep == 1)? 2:1;
+      this.#walkStep = (this.#walkStep==1) ? 2 : 1;
       this.#delay = 20;
     }
-
   } //update
-  
+
   draw(ctx) {
     let img = this.#image;
     let x = this.#x;
