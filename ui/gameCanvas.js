@@ -29,7 +29,7 @@ export default class GameCanvas {
     this.#map = new Map();
 
     // class_enemy
-    this.#enemy = new Enemy();
+    this.#enemy = [];
 
     // time ID
     this.#tid = null;
@@ -39,6 +39,22 @@ export default class GameCanvas {
     this.#canvas.onkeyup = this.keyUpHandler.bind(this);
   }
 
+  keyUpHandler(e) {
+    switch (e.key) {
+      case "ArrowUp":
+        this.#girl.stop("up");
+        break;
+      case "ArrowRight":
+        this.#girl.stop("right");
+        break;
+      case "ArrowDown":
+        this.#girl.stop("down");
+        break;
+      case "ArrowLeft":
+        this.#girl.stop("left");
+        break;
+    }
+  }
   keyDownHandler(e) {
     switch (e.key) {
       case "ArrowUp":
@@ -80,6 +96,8 @@ export default class GameCanvas {
 
   update() {
     this.#girl.update();
+
+    this.#enemy = new Enemy();
   } //update
 
   run() {
