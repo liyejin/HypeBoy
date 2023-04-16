@@ -8,7 +8,8 @@ export default class GameCanvas {
   #tid;
   #map;
   #girl;
-  #enemy;
+  #enemies;
+  #showUpDelay;
 
   constructor() {
     // create canvas
@@ -22,14 +23,15 @@ export default class GameCanvas {
     this.#canvas.width = 700;
     this.#canvas.height = 500;
 
-    // class_girl
-    this.#girl = new Girl();
-
     // class_map
     this.#map = new Map();
 
+    // class_girl
+    this.#girl = new Girl();
+
     // class_enemy
-    this.#enemy = [];
+    this.#enemies = [];
+    this.#showUpDelay = Math.floor(Math.random()*10+30);
 
     // time ID
     this.#tid = null;
@@ -37,8 +39,8 @@ export default class GameCanvas {
     // keyboard handler
     this.#canvas.onkeydown = this.keyDownHandler.bind(this);
     this.#canvas.onkeyup = this.keyUpHandler.bind(this);
-  }
 
+  }
 
   keyUpHandler(e) {
     switch (e.key) {
@@ -51,7 +53,7 @@ export default class GameCanvas {
       case "ArrowDown":
         this.#girl.stop("down");
         break;
-        case "ArrowLeft":
+      case "ArrowLeft":
         this.#girl.stop("left");
         break;
     }
@@ -67,22 +69,35 @@ export default class GameCanvas {
       case "ArrowDown":
         this.#girl.move("down");
         break;
-        case "ArrowLeft":
+      case "ArrowLeft":
         this.#girl.move("left");
         break;
     }
   }
 
+  update() {
+    this.#girl.update();
+
+    this.#showUpDelay--;
+    if(this.#showUpDelay==0){
+      let x = Math.floor(Math.random()*701);
+      let y = Math.floor(Math.random()*31);
+      let enemy = new Enemy(x, y);
+      this.#enemies.push(enemy);
+      this.#showUpDelay = Math.floor(Math.random()*10+30);
+    }
+
+
+    for(let enemy of this.#enemies)
+      enemy.update();
+  } //update
+
   draw() {
     this.#map.draw(this.#ctx);
     this.#girl.draw(this.#ctx);
+    for(let enemy of this.#enemies)
+      enemy.draw(this.#ctx);
   } //draw
-
-  update() {
-    this.#girl.update();
-    
-    this.#enemy = new Enemy();
-  } //update
 
   run() {
     this.#tid = setInterval(() => {

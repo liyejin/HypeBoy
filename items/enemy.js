@@ -1,22 +1,25 @@
-export default class Enemy{
+export default class Enemy {
     #image;
     #x;
     #y;
     #width;
     #height;
-    constructor(){
+    #speed
+    constructor(x, y) {
         this.#image = document.getElementById("enemy");
-        this.#x = 0
-        this.#y = 0;
-        this.#width = this.#image.width;
-        this.#height = this.#image.height;
+        this.#x = x;
+        this.#y = y;
+        this.#width = 40;
+        this.#height = 35;
+
+        this.#speed = 3;
     }
 
-    update(){
-        
+    update() {
+        this.#y += this.#speed;
     }
 
-    draw(ctx){
+    draw(ctx) {
         let img = this.#image;
         let x = this.#x;
         let y = this.#y;
